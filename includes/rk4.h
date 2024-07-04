@@ -34,7 +34,8 @@ class RungeKutta4
     DataStruct<T> Ui;
 
     // RHS 
-    DataStruct<T> *fi;
+    DataStruct<T> *fi_current;
+    DataStruct<T> *fi_final;
 
   public:
 
@@ -64,4 +65,4 @@ class RungeKutta4
    DataStruct<T>* currentU();
 };
 
-#endif // _RUNGE_KUTTA 
+#endif // _RUNGE_KUTTA
