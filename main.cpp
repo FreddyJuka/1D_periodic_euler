@@ -23,7 +23,10 @@ FLOATTYPE calcL2norm(DataStruct<FLOATTYPE> &u, DataStruct<FLOATTYPE> &uinit);
 
 int main(int narg, char **argv)
 {
-  int numPoints =  80;
+  // Initialize MPI
+  MPI_Init(&narg, &argv);
+
+  int numPoints =  8000;
   FLOATTYPE k = 2.; // wave number
 
   if(narg != 3)
@@ -31,6 +34,7 @@ int main(int narg, char **argv)
     std::cout<< "Wrong number of arguments. You should include:" << std::endl;
     std::cout<< "    Num points" << std::endl;
     std::cout<< "    Wave number" << std::endl;
+    MPI_Finalize();
     return 1;
   }else
   {
@@ -71,7 +75,7 @@ int main(int narg, char **argv)
   // Output Initial Condition
   write2File(xj, u, "initialCondition.csv");
 
-  FLOATTYPE t_final = 1.;
+  FLOATTYPE t_final = 10.0;
   FLOATTYPE time = 0.;
   DataStruct<FLOATTYPE> Ui(u.getSize()); // temp. data
 
@@ -107,6 +111,9 @@ int main(int narg, char **argv)
   std::cout << " sec. Error: " << err/k;
   std::cout << " kdx: " << k*datax[1]*2.*M_PI;
   std::cout << std::endl;
+
+  // Finalize MPI
+  MPI_Finalize();
 
   return 0;
 }
