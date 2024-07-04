@@ -30,8 +30,8 @@ RungeKutta4<T>::RungeKutta4(DataStruct<T> &_Un) : Un(_Un)
 template<class T>
 RungeKutta4<T>::~RungeKutta4()
 {
-    delete fi_current;  // Libera memoria de fi_current
-    delete fi_final;    // Libera memoria de fi_final
+    delete fi_current;  
+    delete fi_final;    
     delete[] coeffsA;
     delete[] coeffsB;
 }
